@@ -1,0 +1,119 @@
+{
+  "log": {
+    "loglevel": "none"
+  },
+  "inbounds": [
+    {
+      "port": 10808,
+      "protocol": "socks",
+      "settings": {
+        "udp": true
+      }
+    },
+    {
+      "port": 10809,
+      "protocol": "http",
+      "settings": {
+        "timeout": 0
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "178.250.243.97",
+            "port": 443,
+            "users": [
+              {
+                "id": "50b95deb-6394-46c5-b88a-583e5b3ca7ee",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "fingerprint": "chrome",
+          "serverName": "eh.vk.com",
+          "publicKey": "PGccrEdFmBaB1rQFJqM-a9jJ1pFsxhUP2sD9KTw5Oz4",
+          "shortId": "f69d7af2d5fc5e0c"
+        }
+      }
+    },
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "domain": [
+          "yandex.ru",
+          "vk.com",
+          "mail.ru",
+          "gosuslugi.ru",
+          "sberbank.ru",
+          "tbank.ru",
+          "ozon.ru",
+          "wildberries.ru",
+          "kinopoisk.ru",
+          "avito.ru",
+          "rutube.ru",
+          "school.mos.ru"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "ip": [
+          "91.108.4.0/22",
+          "91.108.8.0/22",
+          "91.108.12.0/22",
+          "91.108.16.0/22",
+          "91.108.56.0/22",
+          "149.154.160.0/20",
+          "149.154.164.0/22",
+          "91.108.20.0/22",
+          "91.108.36.0/23",
+          "91.108.38.0/23",
+          "95.161.64.0/20"
+        ],
+        "domain": [
+          "telegram.org",
+          "web.telegram.org",
+          "t.me",
+          "telegra.ph",
+          "telesco.pe"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "domain": [
+          "domain:ru"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "network": "tcp,udp"
+      }
+    ]
+  }
+}
